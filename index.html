@@ -49,11 +49,26 @@
             <img src="assets/hero.png" alt="Anak bermain edukatif">
         </div>
     </section>
-</main>
-<footer>
-        Developed by <span id="Asep Saepuloh"></span> &copy; <span id="2025"></span>
+
+    <footer>
+        Developed by <span id="developerName"></span> &copy; <span id="year"></span>
     </footer>
 
+    <script>
+        function startGame() {
+            const name = prompt("Hai! Siapa namamu?");
+            if(name){
+                alert(`Selamat datang, ${name}! Yuk mulai bermain dan belajar!`);
+            } else {
+                alert("Yuk mulai bermain dan belajar!");
+            }
+        }
+
+        // Footer dinamis
+        document.getElementById("developerName").textContent = "Agus Imron";
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+</main>
 </body>
 </html>
 
