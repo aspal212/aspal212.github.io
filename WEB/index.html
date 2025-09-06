@@ -3,87 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Edukatif</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            text-align: center;
-        }
-        h1 {
-            margin-top: 20px;
-        }
-        button {
-            margin: 20px;
-            padding: 15px 25px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 8px;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        iframe {
-            width: 800px;
-            height: 600px;
-            border: 2px solid #ccc;
-            margin: 20px auto;
-            display: none; /* Awalnya disembunyikan */
-        }
-        footer {
-            text-align: center;
-            padding: 10px;
-            background-color: #f1f1f1;
-            margin-top: auto;
-            font-size: 14px;
-            color: #555;
-        }
-        footer span {
-            font-weight: bold;
-            animation: colorChange 4s infinite alternate;
-        }
-        @keyframes colorChange {
-            0% { color: #ff4d4d; }
-            25% { color: #4d79ff; }
-            50% { color: #4dff88; }
-            75% { color: #ffd24d; }
-            100% { color: #ff4d4d; }
-        }
-    </style>
+    <title>Website Edukatif</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
-    <h1>Selamat datang di Game Edukatif!</h1>
-    <h2 id="greeting"></h2>
+    <!-- Header Modern -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fa fa-gamepad"></i>
+                <span>JUST PLAY, NOT THE GAME</span>
+            </div>
+            <nav>
+                <div class="menu-item"><a href="#">Beranda</a></div>
+                <div class="menu-item dropdown">
+                    <a href="#">Tentang <i class="fa fa-caret-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="#">Sejarah</a>
+                        <a href="#">Misi</a>
+                    </div>
+                </div>
+                <div class="menu-item dropdown">
+                    <a href="#">Layanan <i class="fa fa-caret-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="#">Permainan Edukatif</a>
+                        <a href="#">Tutorial</a>
+                    </div>
+                </div>
+                <div class="menu-item"><a href="#">Kontak</a></div>
+            </nav>
+        </div>
+    </header>
 
-    <button id="startBtn">Mulai Bermain</button>
-
-    <!-- iframe game -->
-    <iframe id="gameFrame" src="GAME/Robot Pelukis/index.html"></iframe>
+    <main>
+    <main>
+    <section class="hero">
+        <div class="hero-text">
+            <h1>Selamat Datang di Just Play!</h1>
+            <p>Bermain sambil belajar sangat menyenangkan. Temukan permainan edukatif untuk melatih keterampilan berpikir anak.</p>
+            <button onclick="startGame()">Mulai Bermain</button>
+        </div>
+        <div class="hero-image">
+            <img src="assets/hero.png" alt="Anak bermain edukatif">
+        </div>
+    </section>
 
     <footer>
         Developed by <span id="developerName"></span> &copy; <span id="year"></span>
     </footer>
 
     <script>
+        function startGame() {
+            const name = prompt("Hai! Siapa namamu?");
+            if(name){
+                alert(`Selamat datang, ${name}! Yuk mulai bermain dan belajar!`);
+            } else {
+                alert("Yuk mulai bermain dan belajar!");
+            }
+        }
+
         // Footer dinamis
-        document.getElementById("developerName").textContent = "Agus Imron";
+        document.getElementById("developerName").textContent = "Asep Saepuloh";
         document.getElementById("year").textContent = new Date().getFullYear();
-
-        // Proteksi klik kanan
-        document.addEventListener("contextmenu", function(e){
-            e.preventDefault();
-            alert("Maaf, konten ini dilindungi!");
-        });
-
-        // Tombol Mulai Bermain
+        // Fungsi mulai game
         document.getElementById("startBtn").addEventListener("click", function() {
             const name = prompt("Hai! Siapa namamu?");
             const greeting = document.getElementById("greeting");
@@ -93,13 +77,10 @@
                 greeting.textContent = "Yuk mulai bermain dan belajar!";
             }
 
-            // Tampilkan game
-            document.getElementById("gameFrame").style.display = "block";
-
-            // Scroll otomatis ke game
-            document.getElementById("gameFrame").scrollIntoView({ behavior: "smooth" });
+            // Mulai game Robot Pelukis di folder GAME/Robot Pelukis/
+            window.location.href = "GAME/Robot Pelukis/index.html";
         });
     </script>
 
+</main>
 </body>
-</html>
