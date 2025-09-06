@@ -58,39 +58,9 @@
         function startGame() {
             const name = prompt("Hai! Siapa namamu?");
             if(name){
-                alert(`Selamat datang, ${name}! Yuk mulai bermain dan belajar!`);
-                showGame(name);
+                window.location.href = `game.html?name=${encodeURIComponent(name)}`;
             } else {
                 alert("Yuk mulai bermain dan belajar!");
-            }
-        }
-
-        function showGame(name) {
-            const gameArea = document.getElementById("gameArea");
-            gameArea.style.display = "block";
-            gameArea.innerHTML = `
-                <h3>Hai, ${name}! Tebak Angka 1-10</h3>
-                <input type="number" id="guessInput" min="1" max="10" placeholder="Tebak angka...">
-                <button onclick="checkGuess()">Tebak!</button>
-                <p id="gameMsg"></p>
-            `;
-            // Simpan angka acak di window agar bisa diakses fungsi lain
-            window.secretNumber = Math.floor(Math.random() * 10) + 1;
-            window.attempts = 0;
-        }
-
-        function checkGuess() {
-            const guess = parseInt(document.getElementById("guessInput").value);
-            const msg = document.getElementById("gameMsg");
-            window.attempts++;
-            if (guess === window.secretNumber) {
-                msg.textContent = `Benar! Kamu menebak dalam ${window.attempts} percobaan.`;
-            } else if (guess < window.secretNumber) {
-                msg.textContent = "Terlalu kecil! Coba lagi.";
-            } else if (guess > window.secretNumber) {
-                msg.textContent = "Terlalu besar! Coba lagi.";
-            } else {
-                msg.textContent = "Masukkan angka yang valid!";
             }
         }
 
