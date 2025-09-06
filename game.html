@@ -5,38 +5,203 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Tebak Angka</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f7f7fa 0%, #eaf1ff 100%);
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        .game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+        }
+        .game-box {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(79,140,255,0.10);
+            padding: 40px 32px;
+            text-align: center;
+            max-width: 350px;
+            width: 100%;
+            border: 2px solid #4f8cff22;
+        }
+        .game-box h2 {
+            font-size: 2.2rem;
+            margin-bottom: 12px;
+            color: #2d3a4b;
+            letter-spacing: 1px;
+        }
+        .game-box p {
+            font-size: 1.25rem;
+            margin-bottom: 18px;
+            color: #4f8cff;
+            font-weight: 500;
+        }
+        .game-box input[type="number"] {
+            font-size: 1.5rem;
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1.5px solid #4f8cff;
+            width: 120px;
+            margin-bottom: 12px;
+            text-align: center;
+            background: #f3f8ff;
+            color: #2d3a4b;
+            appearance: textfield;
+            -moz-appearance: textfield;
+        }
+        .game-box input[type="number"]::-webkit-outer-spin-button,
+        .game-box input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .game-box button {
+            font-size: 1.2rem;
+            padding: 8px 24px;
+            border-radius: 8px;
+            border: none;
+            background: #4f8cff;
+            color: #fff;
+            cursor: pointer;
+            margin-left: 8px;
+            margin-top: 4px;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 8px #4f8cff22;
+        }
+        .game-box button:hover {
+            background: #346fd1;
+        }
+        .game-box #gameMsg {
+            font-size: 1.2rem;
+            margin-top: 18px;
+            min-height: 32px;
+            color: #e67e22;
+            font-weight: 500;
+        }
+        .game-box #resetBtn {
+            margin-top: 20px;
+            background: #27ae60;
+            font-size: 1.1rem;
+            padding: 8px 20px;
+            margin-left: 0;
+            box-shadow: 0 2px 8px #27ae6022;
+        }
+        .game-box #resetBtn:hover {
+            background: #219150;
+        }
+        .game-box #backBtn {
+            margin-top: 24px;
+            background: #fff;
+            color: #4f8cff;
+            border: 2px solid #4f8cff;
+            font-size: 1.1rem;
+            padding: 8px 20px;
+            margin-left: 0;
+            box-shadow: 0 2px 8px #4f8cff22;
+            transition: background 0.2s, color 0.2s;
+        }
+        .game-box #backBtn:hover {
+            background: #4f8cff;
+            color: #fff;
+        }
+        @media (max-width: 500px) {
+            .game-box {
+                padding: 24px 8px;
+            }
+            .game-box h2 {
+                font-size: 1.3rem;
+            }
+        }
+        header {
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            padding: 16px 0;
+            margin-bottom: 24px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.2rem;
+            color: #4f8cff;
+            font-weight: bold;
+            gap: 8px;
+            justify-content: center;
+            letter-spacing: 1px;
+        }
+    </style>
 </head>
 <body>
+    <!-- Header Modern -->
+    <header>
+        <div class="logo">
+            <i class="fa fa-gamepad"></i>
+            <span>JUST PLAY, NOT THE GAME</span>
+        </div>
+    </header>
     <main>
-        <h2>Game Tebak Angka 1-10</h2>
-        <p id="welcome"></p>
-        <input type="number" id="guessInput" min="1" max="10" placeholder="Tebak angka...">
-        <button onclick="checkGuess()">Tebak!</button>
-        <p id="gameMsg"></p>
+        <div class="game-container">
+            <div class="game-box">
+                <h2>Game Tebak Angka 1-10</h2>
+                <p id="welcome"></p>
+                <input type="number" id="guessInput" min="1" max="10" placeholder="0">
+                <button id="guessBtn" onclick="checkGuess()">Tebak!</button>
+                <div id="gameMsg"></div>
+                <button id="resetBtn" onclick="resetGame()" style="display:none;">Main Lagi</button>
+                <button id="backBtn" onclick="window.location.href='index.html'">Kembali ke Beranda</button>
+            </div>
+        </div>
     </main>
     <script>
         // Ambil nama dari query string
         const params = new URLSearchParams(window.location.search);
         const name = params.get('name') || 'Pemain';
-        document.getElementById('welcome').textContent = `Hai, ${name}!`;
+        document.getElementById('welcome').textContent = `Hai, ${name}! Silakan tebak angka antara 1 sampai 10.`;
 
         // Game logic
-        window.secretNumber = Math.floor(Math.random() * 10) + 1;
-        window.attempts = 0;
+        let secretNumber = Math.floor(Math.random() * 10) + 1;
+        let attempts = 0;
+        let finished = false;
 
         function checkGuess() {
-            const guess = parseInt(document.getElementById("guessInput").value);
+            if (finished) return;
+            const guessInput = document.getElementById("guessInput");
+            const guess = parseInt(guessInput.value);
             const msg = document.getElementById("gameMsg");
-            window.attempts++;
-            if (guess === window.secretNumber) {
-                msg.textContent = `Benar! Kamu menebak dalam ${window.attempts} percobaan.`;
-            } else if (guess < window.secretNumber) {
-                msg.textContent = "Terlalu kecil! Coba lagi.";
-            } else if (guess > window.secretNumber) {
-                msg.textContent = "Terlalu besar! Coba lagi.";
-            } else {
-                msg.textContent = "Masukkan angka yang valid!";
+            attempts++;
+            if (isNaN(guess) || guess < 1 || guess > 10) {
+                msg.textContent = "Masukkan angka 1 sampai 10!";
+                msg.style.color = "#e74c3c";
+                return;
             }
+            if (guess === secretNumber) {
+                msg.textContent = `Benar! Kamu menebak dalam ${attempts} percobaan.`;
+                msg.style.color = "#27ae60";
+                finished = true;
+                document.getElementById("guessBtn").disabled = true;
+                guessInput.disabled = true;
+                document.getElementById("resetBtn").style.display = "inline-block";
+            } else if (guess < secretNumber) {
+                msg.textContent = "Terlalu kecil! Coba lagi.";
+                msg.style.color = "#e67e22";
+            } else if (guess > secretNumber) {
+                msg.textContent = "Terlalu besar! Coba lagi.";
+                msg.style.color = "#e67e22";
+            }
+        }
+
+        function resetGame() {
+            secretNumber = Math.floor(Math.random() * 10) + 1;
+            attempts = 0;
+            finished = false;
+            document.getElementById("gameMsg").textContent = "";
+            document.getElementById("guessInput").value = "";
+            document.getElementById("guessInput").disabled = false;
+            document.getElementById("guessBtn").disabled = false;
+            document.getElementById("resetBtn").style.display = "none";
         }
     </script>
 </body>

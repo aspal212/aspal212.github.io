@@ -56,8 +56,10 @@
 
     <script>
         function startGame() {
-            const name = prompt("Hai! Siapa namamu?");
+            let name = prompt("Hai! Siapa namamu?");
             if(name){
+                // Ubah nama menjadi HURUF KAPITAL SEMUA
+                name = name.trim().toUpperCase();
                 window.location.href = `game.html?name=${encodeURIComponent(name)}`;
             } else {
                 alert("Yuk mulai bermain dan belajar!");
