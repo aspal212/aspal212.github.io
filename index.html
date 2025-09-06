@@ -43,6 +43,7 @@
             <h1>Selamat Datang di Just Play!</h1>
             <p>Bermain sambil belajar sangat menyenangkan. Temukan permainan edukatif untuk melatih keterampilan berpikir anak.</p>
             <button onclick="startGame()">Mulai Bermain</button>
+            <div id="gameArea" style="display:none; margin-top:20px;"></div>
         </div>
         <div class="hero-image">
             <img src="assets/hero.png" alt="Anak bermain edukatif">
@@ -58,12 +59,41 @@
             const name = prompt("Hai! Siapa namamu?");
             if(name){
                 alert(`Selamat datang, ${name}! Yuk mulai bermain dan belajar!`);
-                // Tambahkan aksi memulai game di sini, misal:
-                // window.location.href = "game.html";
+                showGame(name);
             } else {
                 alert("Yuk mulai bermain dan belajar!");
             }
         }
+
+        function showGame(name) {
+            const gameArea = document.getElementById("gameArea");
+            gameArea.style.display = "block";
+            gameArea.innerHTML = `
+                <h3>Hai, ${name}! Tebak Angka 1-10</h3>
+                <input type="number" id="guessInput" min="1" max="10" placeholder="Tebak angka...">
+                <button onclick="checkGuess()">Tebak!</button>
+                <p id="gameMsg"></p>
+            `;
+            // Simpan angka acak di window agar bisa diakses fungsi lain
+            window.secretNumber = Math.floor(Math.random() * 10) + 1;
+            window.attempts = 0;
+        }
+
+        function checkGuess() {
+            const guess = parseInt(document.getElementById("guessInput").value);
+            const msg = document.getElementById("gameMsg");
+            window.attempts++;
+            if (guess === window.secretNumber) {
+                msg.textContent = `Benar! Kamu menebak dalam ${window.attempts} percobaan.`;
+            } else if (guess < window.secretNumber) {
+                msg.textContent = "Terlalu kecil! Coba lagi.";
+            } else if (guess > window.secretNumber) {
+                msg.textContent = "Terlalu besar! Coba lagi.";
+            } else {
+                msg.textContent = "Masukkan angka yang valid!";
+            }
+        }
+
         // Footer dinamis
         document.getElementById("developerName").textContent = "Asep Saepuloh";
         document.getElementById("year").textContent = new Date().getFullYear();
