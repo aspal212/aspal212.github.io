@@ -1,0 +1,34 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: #e0f7fa;
+}
+
+#game-board {
+  display: grid;
+  grid-template-columns: repeat(10, 40px);
+  grid-template-rows: repeat(10, 40px);
+  gap: 2px;
+  justify-content: center;
+  margin: 20px auto;
+}
+
+.cell {
+  width: 40px;
+  height: 40px;
+  background: #fff;
+  border: 1px solid #000;
+  position: relative;
+}
+
+.snake-head {
+  background: url('assets/snake-head.png') no-repeat center/contain;
+}
+
+.snake-body {
+  background: url('assets/snake-body.png') no-repeat center/contain;
+}
+
+.target-cell {
+  background: rgba(255, 215, 0, 0.5); /* target shape highlight */
+}
