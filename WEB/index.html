@@ -67,7 +67,20 @@
         // Footer dinamis
         document.getElementById("developerName").textContent = "Asep Saepuloh";
         document.getElementById("year").textContent = new Date().getFullYear();
+        // Fungsi mulai game
+        document.getElementById("startBtn").addEventListener("click", function() {
+            const name = prompt("Hai! Siapa namamu?");
+            const greeting = document.getElementById("greeting");
+            if(name){
+                greeting.textContent = `Selamat datang, ${name}! Yuk mulai bermain dan belajar!`;
+            } else {
+                greeting.textContent = "Yuk mulai bermain dan belajar!";
+            }
+
+            // Mulai game Robot Pelukis di folder GAME/Robot Pelukis/
+            window.location.href = "GAME/Robot Pelukis/index.html";
+        });
     </script>
+
 </main>
 </body>
-</html>
