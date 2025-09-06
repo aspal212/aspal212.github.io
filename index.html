@@ -59,6 +59,8 @@
             const name = prompt("Hai! Siapa namamu?");
             if(name){
                 alert(`Selamat datang, ${name}! Yuk mulai bermain dan belajar!`);
+                // Tambahkan kode untuk memulai game di sini
+                // Contoh: window.location.href = "game.html";
             } else {
                 alert("Yuk mulai bermain dan belajar!");
             }
@@ -67,17 +69,8 @@
         // Footer dinamis
         document.getElementById("developerName").textContent = "Asep Saepuloh";
         document.getElementById("year").textContent = new Date().getFullYear();
-        // Fungsi mulai game
-        document.getElementById("startBtn").addEventListener("click", function() {
-            const name = prompt("Hai! Siapa namamu?");
-            const greeting = document.getElementById("greeting");
-            if(name){
-                greeting.textContent = `Selamat datang, ${name}! Yuk mulai bermain dan belajar!`;
-            } else {
-                greeting.textContent = "Yuk mulai bermain dan belajar!";
-            }
-        });
     </script>
 
 </main>
 </body>
+</html>
