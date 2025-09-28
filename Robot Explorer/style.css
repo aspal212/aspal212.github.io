@@ -1,0 +1,86 @@
+/* Reset dasar */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #eef2ff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+h1 {
+  margin-bottom: 5px;
+}
+
+h2 {
+  margin-bottom: 15px;
+}
+
+#game-board {
+  display: grid;
+  grid-template-columns: repeat(5, 60px);
+  grid-template-rows: repeat(5, 60px);
+  gap: 5px;
+  margin-bottom: 15px;
+}
+
+.cell {
+  width: 60px;
+  height: 60px;
+  background: #ffffff;
+  border: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+
+/* Robot */
+.robot {
+  font-size: 32px;
+}
+
+/* Bintang */
+.goal {
+  font-size: 28px;
+}
+
+/* Rintangan */
+.obstacle {
+  background: #ff5252;
+  color: white;
+  font-weight: bold;
+}
+
+/* Jejak pergerakan */
+.cell.trail {
+  background: #90caf9;
+  border-radius: 4px;
+  opacity: 0.7;
+}
+
+#commands {
+  width: 300px;
+  height: 80px;
+  margin: 10px 0;
+  padding: 5px;
+  font-size: 14px;
+}
+
+#run {
+  padding: 8px 14px;
+  margin-bottom: 15px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#score {
+  font-weight: bold;
+  font-size: 18px;
+}
